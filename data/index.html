@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>test</h1>
+<script>
+    url = "ws://192.168.172.130:8812";
+    wsClient = new WebSocket(url);
+
+    wsClient.onopen = function (evt) {
+        wsClient.send("hello world");
+        console.log('success open');
+    }
+
+    wsClient.onmessage = function(evt){
+        console.log("message success data: " + evt.data)
+    }
+
+    wsClient.onclose = function(evt){
+        console.log('close');
+    }
+
+    wsClient.onerror = function(evt,e){
+        console.log("error data:" + evt.data);
+    }
+</script>
+</body>
+</html>
