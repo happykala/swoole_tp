@@ -66,14 +66,28 @@ class Http_Server{
      * @return array
      */
     public function tanslateRequestParams($request){
-        foreach ($request->server as $key=>$value){
-            $_SERVER[strtoupper($key)] = $value;
+        $_SERVER = [];
+        if(isset($request->server)){
+            foreach ($request->server as $key=>$value){
+                $_SERVER[strtoupper($key)] = $value;
+            }
         }
-        foreach ($request->get as $key=>$value){
-            $_GET[$key] = $value;
+        if(isset($request->header)){
+            foreach ($request->header as $key=>$value){
+                $_SERVER[strtoupper($key)] = $value;
+            }
         }
-        foreach ($request->post as $key=>$value){
-            $_POST[$key] = $value;
+        $_GET = [];
+        if(isset($request->get)){
+            foreach ($request->get as $key=>$value){
+                $_GET[$key] = $value;
+            }
+        }
+        $_POST = [];
+        if(isset($request->post)){
+            foreach ($request->post as $key=>$value){
+                $_POST[$key] = $value;
+            }
         }
     }
 }
