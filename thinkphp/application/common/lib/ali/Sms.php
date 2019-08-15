@@ -77,6 +77,18 @@ class Sms
 //        $request->setSmsUpExtendCode("1234567");
         // 发起访问请求
         $acsResponse = static::getAcsClient()->getAcsResponse($request);
-        return $acsResponse;
+        return self::dealReturnData($acsResponse);
+    }
+
+
+    /**
+     * deal return data
+     * @param $acsResponse
+     */
+    public static function dealReturnData($acsResponse){
+        $arrReturn = [];
+        $arrReturn['code'] = $acsResponse->Code;
+        $arrReturn['message'] = $acsResponse->Message;
+        return $arrReturn;
     }
 }

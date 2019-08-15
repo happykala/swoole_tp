@@ -228,4 +228,5 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    'extra_config_list' => ['redis']
 ];

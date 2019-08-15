@@ -9,6 +9,6 @@ return [
     'ip' => '127.0.0.1',
     'port' => 6379,
     'time_out' => 20,
-    'password' => '123456',
-    'index' => 1
+    'password' => 'happykala',
+    'index' => 0
 ];

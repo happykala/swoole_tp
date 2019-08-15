@@ -677,9 +677,9 @@ class Request
      */
     public function post($name = '', $default = null, $filter = null)
     {
-        if (empty($this->post)) {
+        //if (empty($this->post)) {
             $this->post = $_POST;
-        }
+        //}
         if (is_array($name)) {
             $this->param       = [];
             return $this->post = array_merge($this->post, $name);

@@ -20,15 +20,15 @@ class RedisBasic extends \Redis
     public function __construct($redis_config = array(),$index)
     {
         if(count($redis_config) == 0){
+            $this->ip =  config('redis.ip');
+            $this->port = config('redis.port');
+            $this->password = config('redis.password');
+            $this->time_out = config('redis.time_out');
+        }else{
             $this->ip = $redis_config['ip'];
             $this->port = $redis_config['port'];
             $this->password = $redis_config['password'];
             $this->time_out = $redis_config['time_out'];
-        }else{
-            $this->ip = config('redis.ip');
-            $this->port = config('redis.port');
-            $this->password = config('redis.password');
-            $this->time_out = config('redis.time_out');
         }
 
         if($this->connect($this->ip,$this->port,$this->time_out) == true){
@@ -37,7 +37,7 @@ class RedisBasic extends \Redis
         $this->select($index);
     }
 
-    public static function getInstance($redis_config = array(),$index,$doCheck = true){
+    public static function getInstance($redis_config = array(),$index = 0,$doCheck = true){
         if(self::$instance === [] || !array_key_exists($index,self::$instance) ){
             self::$instance[$index] = new RedisBasic($redis_config,$index);
         }
