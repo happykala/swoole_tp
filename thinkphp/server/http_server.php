@@ -52,11 +52,11 @@ class Http_Server{
      */
     public function onRequest($request,$response){
         $this->tanslateRequestParams($request);
-        ob_start();
+//        ob_start();
         think\App::run()->send();//执行实际的应用请求
-        $content = ob_get_contents();
-        $response->end($content);
-        ob_clean();
+//        $content = ob_get_contents();
+//        $response->end($content);
+//        ob_clean();
     }
 
 

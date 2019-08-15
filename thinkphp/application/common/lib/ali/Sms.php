@@ -1,9 +1,9 @@
 <?php
-namespace app\extend\common\ali\sms;
+namespace app\common\lib\ali;
 
 ini_set("display_errors", "on");
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once APP_PATH . '/../extend/ali/sms/vendor/autoload.php';
 
 use Aliyun\Core\Config;
 use Aliyun\Core\Profile\DefaultProfile;
@@ -33,8 +33,8 @@ class Sms
         //产品域名,开发者无需替换
         $domain = "dysmsapi.aliyuncs.com";
         // TODO 此处需要替换成开发者自己的AK (https://ak-console.aliyun.com/)
-        $accessKeyId = "yourAccessKeyId"; // AccessKeyId
-        $accessKeySecret = "yourAccessKeySecret"; // AccessKeySecret
+        $accessKeyId = "LTAI53qBBJxSmzV1"; // AccessKeyId
+        $accessKeySecret = "9iYxrvPk7On7WNprZCS3Y7W0MjKynw"; // AccessKeySecret
         // 暂时不支持多Region
         $region = "cn-hangzhou";
         // 服务结点

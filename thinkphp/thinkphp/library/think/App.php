@@ -486,7 +486,7 @@ class App
      */
     public static function routeCheck($request, array $config)
     {
-        $path   = $request->path(); echo "path:".$path;
+        $path   = $request->path();
         $depr   = $config['pathinfo_depr'];
         $result = false;
         // 路由检测

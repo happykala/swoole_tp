@@ -1,11 +1,11 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
-use app\extend\common\ali\sms\Sms;
+use app\common\lib\ali\Sms;
 
 class Sendsms extends Controller {
-
     public function send(){
-        echo "test send";
+        $return = Sms::sendSms('18963970962','1234');
+        return 'testcode';
     }
 }
