@@ -29,6 +29,8 @@ class Http_Server{
         $this->server->set($_set);
         $this->server->on('WorkerStart',array($this,'onWorkerStart'));
         $this->server->on('Request',array($this,'onRequest'));
+        $this->server->on('task',array($this,'onTask'));
+        $this->server->on('finish',array($this,'onFinish'));
         $this->server->start();
     }
 
@@ -52,11 +54,28 @@ class Http_Server{
      */
     public function onRequest($request,$response){
         $this->tanslateRequestParams($request);
-//        ob_start();
+        $this->server->task($_POST);
         think\App::run()->send();//执行实际的应用请求
-//        $content = ob_get_contents();
-//        $response->end($content);
-//        ob_clean();
+    }
+
+    /**
+     * @param swoole_server $server
+     * @param $task_id
+     * @param $from_id
+     * @param $data
+     */
+    public function onTask(swoole_server $server,$task_id,$from_id,$data){
+        var_dump($data);
+        $this->server->finish($data);
+    }
+
+    /**
+     * @param swoole_server $server
+     * @param $task_id
+     * @param $data
+     */
+    public function onFinish(swoole_server $server,$task_id,$data){
+        echo 'task finish';
     }
 
 
@@ -99,7 +118,8 @@ $set = [
     "log_file" => "/home/happykala/log.log",
     "enable_static_handler" => true,
     "document_root" => "/home/happykala/thinkphp/static/live",
-    "worker_num" => 5
+    "worker_num" => 5,
+    "task_worker_num" => 10
 ];
 $httpServer = new Http_Server($ip,$port,$set);
 

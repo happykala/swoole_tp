@@ -9,14 +9,38 @@ namespace app\common\lib\memory;
 
 use think\Exception;
 
+/**
+ * Class RedisBasic
+ * @package app\common\lib\memory
+ */
 class RedisBasic extends \Redis
 {
+    /**
+     * @var string
+     */
     private $ip;
+    /**
+     * @var integer
+     */
     private $port;
+    /**
+     * @var string
+     */
     private $password;
+    /**
+     * @var integer
+     */
     private $time_out;
+    /**
+     * @var array
+     */
     private static $instance = [];
 
+    /**
+     * RedisBasic constructor.
+     * @param array $redis_config
+     * @param $index
+     */
     public function __construct($redis_config = array(),$index)
     {
         if(count($redis_config) == 0){
@@ -37,6 +61,13 @@ class RedisBasic extends \Redis
         $this->select($index);
     }
 
+    /**
+     * get redis operation object
+     * @param array $redis_config
+     * @param int $index
+     * @param bool $doCheck
+     * @return mixed
+     */
     public static function getInstance($redis_config = array(),$index = 0,$doCheck = true){
         if(self::$instance === [] || !array_key_exists($index,self::$instance) ){
             self::$instance[$index] = new RedisBasic($redis_config,$index);
@@ -51,12 +82,12 @@ class RedisBasic extends \Redis
         return self::$instance[$index];
     }
 
-
     /**
-     * @abstract set key-value
+     * set key-value
      * @param $key
      * @param $value
-     * @param $time_out
+     * @param int $time_out
+     * @return bool
      */
     public function setValue($key,$value,$time_out = 0){
         if(!is_string($value)){
