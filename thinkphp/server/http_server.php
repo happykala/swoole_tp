@@ -44,7 +44,7 @@ class Http_Server{
         // 定义应用目录
         define('APP_PATH', __DIR__ . '/../application/');
         // 加载基础文件
-        require __DIR__ . '/../thinkphp/base.php';
+        require __DIR__ . '/../thinkphp/start.php';
     }
 
     /**
@@ -54,7 +54,7 @@ class Http_Server{
      */
     public function onRequest($request,$response){
         $this->tanslateRequestParams($request);
-        $this->server->task($_POST);
+        $_POST['http_server'] = $this->server;
         think\App::run()->send();//执行实际的应用请求
     }
 
@@ -65,7 +65,14 @@ class Http_Server{
      * @param $data
      */
     public function onTask(swoole_server $server,$task_id,$from_id,$data){
-        var_dump($data);
+        $objSend = new app\common\lib\Send();
+        $method = $data['method'];
+        $flag = $objSend->$method($data);
+        if($flag){
+            echo 'send success';
+        }else{
+            echo 'send failed';
+        }
         $this->server->finish($data);
     }
 

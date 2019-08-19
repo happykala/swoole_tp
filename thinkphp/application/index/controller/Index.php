@@ -5,11 +5,7 @@ class Index
 {
     public function index()
     {
-        return 'hello happykala';
+        return '';
     }
 
-    public function test(){
-        echo time()." test";
-        return "hello test";
-    }
 }

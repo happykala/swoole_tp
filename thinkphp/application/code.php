@@ -9,5 +9,7 @@ return [
     'mobilePhonesuccess' => 0,
     'mobilePhoneerror' => 1,
     'mobilePhonesuccessdes' => '手机号码格式正确',
-    'mobilePhoneerrordes' => '手机号码格式错误'
+    'mobilePhoneerrordes' => '手机号码格式错误',
+    'success' => '成功',
+    'error' => '失败'
 ];
